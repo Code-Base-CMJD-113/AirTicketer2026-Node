@@ -25,9 +25,19 @@ router.get(airportURL, async (req,res)=>{
     
 })
 
-router.post(airportURL,(req,res)=>{
-    airportService.savetAirport()
-    res.send("POST Airport details")
+router.post(airportURL,async (req,res)=>{
+    try{
+        const airport =  new Airport({
+            airportCode: req.body.airportCode,
+            name: req.body.name,
+            city: req.body.city,
+            country: req.body.country,
+         });
+         await airportService.savetAirport(airport)
+         res.status(201).send("Saved airport data successfuly")
+    }catch(err){
+        console.log("Failed to save airport data", err)
+    }
 })
 
 router.patch(airportURL,(req,res)=>{
