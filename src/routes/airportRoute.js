@@ -4,8 +4,9 @@ const router = express.Router()
 const airportURL = "/airports"
 const airportService = require("../service/airportService")
 const Airport = require("../model/airportModel")
+const authToken = require("../middleware/authToken")
 
-router.get(airportURL, async (req,res)=>{
+router.get(airportURL, authToken, async (req,res)=>{
     try{
        const allAirports =
         await airportService.getAllAirports()

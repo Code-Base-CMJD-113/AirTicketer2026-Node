@@ -29,9 +29,9 @@ router.post(`${authUrl}/signup`,async(req,res)=>{
 });
 
 //Sign in
- router.post(`${authUrl}/signin`,async(req,res)=>{
+ router.post(`${authUrl}/login`,async(req,res)=>{
      const { email, password} = req.body
-     const user = User.findOne({email})
+     const user = await User.findOne({email})
      //check pw validity
      const isValidPassword = await bcrypt.compare(password, user.password)
      if(!user || !isValidPassword){
