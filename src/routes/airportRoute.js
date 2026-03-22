@@ -3,10 +3,25 @@ const express = require("express")
 const router = express.Router()
 const airportURL = "/airports"
 const airportService = require("../service/airportService")
+const Airport = require("../model/airportModel")
 
-router.get(airportURL,(req,res)=>{
-    airportService.getAllAirports()
-    res.send("GET Airport details")
+router.get(airportURL, async (req,res)=>{
+    try{
+       const allAirports =
+        await airportService.getAllAirports()
+        const filterList = allAirports.map(airport => ({
+            airportId: airport.airportId,
+            airportCode: airport.airportCode,
+            name: airport.name,
+            city: airport.city,
+            country: airport.country
+        }))
+        console.log(filterList)
+        res.status(200).json(filterList)
+    }catch(err){
+        console.error("Fetch airport data faild")
+        res.status(500).send("Internal process issue")
+    }
     
 })
 

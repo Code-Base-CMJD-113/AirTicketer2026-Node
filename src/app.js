@@ -3,6 +3,8 @@ const app = express()
 const PORT = 3500
 const airportRoute = require("../src/routes/airportRoute")
 const mongoose = require("mongoose")
+app.use(express.json())
+
 app.get("/",(req,res)=>{
     res.send("Hello CMJD 113")
 })

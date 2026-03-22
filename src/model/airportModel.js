@@ -2,11 +2,12 @@ const mongoose = require("mongoose")
 const { v4: uuid4} = require("uuid")
 
 const airportSchema = new mongoose.Schema({
-    airportCode:{
+    airportId:{
         type: String,
         default: () => uuid4(),
         unique: true
     },
+    airportCode: {type: String, required: true},
     name: {type: String, required: true},
     city: {type: String, required: true},
     country: {type: String, required: true}
