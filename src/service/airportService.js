@@ -1,18 +1,20 @@
+const Airport = require("../model/airportModel")
 
 async function getAllAirports () {
-    console.log("Get All Airports from Service layer")   
+    return Airport.find()
 }
 
-async function savetAirport () {
-    console.log("Save Airport from Service layer")
+async function savetAirport (airport) {
+    const savedAirport = new Airport(airport)
+    return savedAirport.save()
 }
 
-async function updateAirport () {
-    console.log("Update airport from Service layer")
+async function updateAirport (airportId, airport) {
+    return Airport.findOneAndUpdate({airportId: airportId},airport,{new: true})
 }
 
-async function deletelAirport () {
-    console.log("Delete Airport from Service layer")
+async function deletelAirport (airportId) {
+  return Airport.findOneAndDelete({airportId})
 }
 
 module.exports = { getAllAirports, savetAirport, updateAirport, deletelAirport }
