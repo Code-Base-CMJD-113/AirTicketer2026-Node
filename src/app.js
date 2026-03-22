@@ -5,9 +5,16 @@ const PORT = process.env.PORT || 3500
 const airportRoute = require("../src/routes/airportRoute")
 const authRoute = require("../src/routes/authRoutes")
 const mongoose = require("mongoose")
+const cors = require("cors")
+
 app.use(express.json())
-
-
+//Handle CORS
+app.use(cors({
+    origin: ['http://localhost:3000'],
+    methods: ['GET','POST','PUT','PATCH','DELETE','OPTION'],
+    allowedHeaders: ['Content-Type','Authorization'],
+    credentials: true    
+}))
 app.get("/",(req,res)=>{
     res.send("Hello CMJD 113")
 })
