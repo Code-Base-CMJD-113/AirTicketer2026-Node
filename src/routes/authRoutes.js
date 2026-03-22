@@ -4,6 +4,7 @@ const authUrl = "/auth"
 const User = require("../model/userModel")
 const bcrypt  = require("bcryptjs")
 const { addUser } = require("../service/authService")
+const jwt = require("jsonwebtoken")
 
 //SignUp
 router.post(`${authUrl}/signup`,async(req,res)=>{
