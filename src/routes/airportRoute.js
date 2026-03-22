@@ -24,7 +24,6 @@ router.get(airportURL, async (req,res)=>{
     }
     
 })
-
 router.post(airportURL,async (req,res)=>{
     try{
         const airport =  new Airport({
@@ -40,14 +39,26 @@ router.post(airportURL,async (req,res)=>{
     }
 })
 
-router.patch(airportURL,(req,res)=>{
-    airportService.updateAirport()
-    res.send("PATCH Airport details")
+router.patch(`${airportURL}/:id`,async (req,res)=>{
+    try{
+        const id = req.params.id
+        const body = req.body
+       await airportService.updateAirport(id,body)
+       res.status(204).send("Airport data updated")
+    }catch(err){
+        console.error(err)
+    }
 })
 
-router.delete(airportURL,(req,res)=>{
-    airportService.deletelAirport()
-    res.send("DELETE Airport details")
+router.delete(`${airportURL}/:id`,async(req,res)=>{
+    try{
+        const id = req.params.id
+        airportService.deletelAirport(id)
+        res.status(204).send("Airport data deleted")
+    }catch(err){
+        console.error(err)
+    }
+
 })
 
 module.exports = router;
